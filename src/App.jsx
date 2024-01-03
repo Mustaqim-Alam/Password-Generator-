@@ -14,7 +14,7 @@ function App() {
       str += "123456789";
     }
     if (charAllowes) {
-      str += "!@#$%^&*()";
+      str += "`~!@#$%^&*()";
     }
 
     for (let i = 0; i < length; i++) {
@@ -27,7 +27,7 @@ function App() {
   const passwordRef = useRef(null);
 
   let copyClipbord = useCallback(() => {
-    passwordRef.current.select();
+    passwordRef.current?.select();
     window.navigator.clipboard.writeText(password);
   }, [password]);
 
@@ -41,7 +41,7 @@ function App() {
 
   return (
     <>
-      <div className="w-full max-w-md mx-auto  text-navy-700 rounded bg-gray-300 center pb-10 pt-5 px-5 my-8">
+      <div className="w-full max-w-md mx-auto  text-navy-700 rounded bg-gray-300 center pb-10 pt-5 px-10 my-8">
         <h1 className="text-4xl text-center mb-6">Password Generator </h1>
         <div className="flex rounded-lg shadow overflow-hidden mb-4">
           <input
@@ -63,13 +63,13 @@ function App() {
         </div>
         <div className="w-full flex items-center justify-center mb-2">
           <button
-            className=" text-white  px-6 py-2 rounded-xl outline-none shrink-0 bg-orange-950 hover:bg-orange-900 self-center "
+            className=" text-white  px-6 py-2 rounded-xl outline-none mt-3 shrink-0 bg-orange-950 hover:bg-orange-900 self-center "
             onClick={() => generateNewPassword()}
           >
             Generator New Password
           </button>
         </div>
-        <div className="flex text-sm gap-2 flex-wrap ">
+        <div className="flex text-sm gap-2 flex-wrap my-8 ">
           <div
             className="flex items-center gap-x-1  
            "
@@ -84,27 +84,29 @@ function App() {
                 setLength(e.target.value);
               }}
             />
-            <label>Length: {length}</label>
+            <label >Length: {length}</label>
           </div>
           <div className=" flex items-center gap-x-1">
             <input
               type="checkbox"
+              id="num"
               defaultChecked={numAllowes}
               onChange={() => {
                 setnumAllowes((prev) => !prev);
               }}
             />
-            <label>Number</label>
+            <label htmlFor="num" className=" cursor-pointer" >Number</label>
           </div>
           <div className=" flex items-center gap-x-1">
             <input
               type="checkbox"
+              id="char"
               defaultChecked={charAllowes}
               onChange={() => {
                 setCharAllowes((prev) => !prev);
               }}
             />
-            <label>Charecter</label>
+            <label htmlFor="char" className=" cursor-pointer">Charecter</label>
           </div>
         </div>
       </div>
